@@ -8,9 +8,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextLevel.Extensions.Tests", "NextLevel.Exntensions.Tests\NextLevel.Extensions.Tests.csproj", "{3AA60D97-5D72-46D3-A518-73C78C92C68E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4209430-0639-4544-890E-0F85B8FFD104}"
-	ProjectSection(SolutionItems) = preProject
-		Reame.md = Reame.md
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
