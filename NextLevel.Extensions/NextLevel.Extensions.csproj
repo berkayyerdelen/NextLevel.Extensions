@@ -5,6 +5,11 @@
     <Authors>Berkay Yerdelen</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Extensions Methods</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageTags>Usefull extensions</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/berkayyerdelen/NextLevel.Extensions</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
