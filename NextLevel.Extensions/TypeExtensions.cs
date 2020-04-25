@@ -5,8 +5,12 @@ using System.Text;
 
 namespace NextLevel.Extensions
 {
+    /// <summary>
+    /// Type checks
+    /// </summary>
     public static class TypeExtensions
     {
+        
         public static bool IsTypeBoolen(this Type type)
         {
             return type == typeof(Boolean);

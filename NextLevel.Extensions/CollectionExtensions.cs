@@ -5,26 +5,44 @@ using System.Linq.Expressions;
 
 namespace NextLevel.Extensions
 {
-    public class DictionaryFixture<Tkey, TValue>
+    /// <summary>
+    /// It will be use in convertion of dictonary to list
+    /// </summary>
+    /// <typeparam name="TKey">Type of Key</typeparam>
+    /// <typeparam name="TValue">Type of Value</typeparam>
+    public class DictionaryFixture<TKey, TValue>
     {
-        public DictionaryFixture(Tkey key, TValue value)
+        public DictionaryFixture(TKey key, TValue value)
         {
             Key = key;
             Value = value;
         }
-        public Tkey Key { get; set; }
+        public TKey Key { get; set; }
         public TValue Value { get; set; }
     }
     public static class CollectionExtensions
     {
+        /// <summary>
+        /// Extension imp of dictionary to list
+        /// </summary>
+        /// <typeparam name="TKey">Generic Key type</typeparam>
+        /// <typeparam name="TValue">Generic Key type</typeparam>
+        /// <param name="dictionary">argument</param>
+        /// <returns></returns>
         public static List<DictionaryFixture<TKey, TValue>> ToList<TKey, TValue>(
             this Dictionary<TKey, TValue> dictionary)
         {
 
-            var t =dictionary.Select(x => new DictionaryFixture<TKey, TValue>(x.Key,x.Value));
-            return t.ToList();
+            var source =dictionary.Select(x => new DictionaryFixture<TKey, TValue>(x.Key,x.Value));
+            return source.ToList();
 
         }
+        /// <summary>
+        /// Removing the dubplicate values in collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static List<T> RemoveDuplicates<T>(this List<T> input)
         {
             Dictionary<T, int> uniqueStore = new Dictionary<T, int>();
@@ -40,6 +58,14 @@ namespace NextLevel.Extensions
             }
             return finalList;
         }
+        /// <summary>
+        /// Paging by via linq queries
+        /// </summary>
+        /// <typeparam name="T">Generic Type</typeparam>
+        /// <param name="query">Collection</param>
+        /// <param name="skipCount">Skip parameter</param>
+        /// <param name="maxResultCount">Max result of count</param>
+        /// <returns></returns>
         public static IQueryable<T> PageBy<T>(this IQueryable<T> query, int skipCount, int maxResultCount)
         {
             if (query == null)
@@ -47,6 +73,14 @@ namespace NextLevel.Extensions
 
             return query.Skip(skipCount).Take(maxResultCount);
         }
+        /// <summary>
+        /// WhereIf condition with predicate
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="condition"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, Expression<Func<T, bool>> predicate)
         {
             return condition

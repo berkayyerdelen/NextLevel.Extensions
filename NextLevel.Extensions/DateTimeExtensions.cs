@@ -4,6 +4,15 @@ namespace NextLevel.Extensions
 {
     public static class DateTimeExtensions
     {
+        /// <summary>
+        /// Convert to time stamp date time
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <param name="hours"></param>
+        /// <param name="minutes"></param>
+        /// <param name="seconds"></param>
+        /// <param name="milliseconds"></param>
+        /// <returns></returns>
         public static DateTime ChangeTime(this DateTime dateTime, int hours, int minutes, int seconds, int milliseconds)
         {
             if (dateTime == null)
@@ -19,7 +28,11 @@ namespace NextLevel.Extensions
                 milliseconds,
                 dateTime.Kind);
         }
-
+        /// <summary>
+        /// Get year as string
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static string ToYearString(this DateTime dateTime)
         {
             if (dateTime == null)
@@ -27,6 +40,12 @@ namespace NextLevel.Extensions
 
             return dateTime.ToString("yyyy");
         }
+
+        /// <summary>
+        /// Get Month as string
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static string ToMonthString(this DateTime dateTime)
         {
             if (dateTime == null)
@@ -34,7 +53,11 @@ namespace NextLevel.Extensions
 
             return dateTime.ToString("MM");
         }
-
+        /// <summary>
+        /// Get Date as string
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static string ToDayString(this DateTime dateTime)
         {
             if (dateTime == null)
@@ -42,25 +65,40 @@ namespace NextLevel.Extensions
 
             return dateTime.ToString("dd");
         }
-
-        public static bool IsWeekend(this DateTime value)
+        /// <summary>
+        /// Check the day is weekend day
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static bool IsWeekend(this DateTime date)
         {
-            return (value.DayOfWeek == DayOfWeek.Sunday || value.DayOfWeek == DayOfWeek.Saturday);
+            return (date.DayOfWeek == DayOfWeek.Sunday || date.DayOfWeek == DayOfWeek.Saturday);
         }
-        public static bool IsWeekday(this DayOfWeek d)
+        /// <summary>
+        /// Check the day is week day
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static bool IsWeekday(this DateTime date)
         {
-            switch (d)
-            {
-                case DayOfWeek.Sunday: return false;
-                case DayOfWeek.Saturday: return false;
-
-                default: return true;
-            }
+            return (date.DayOfWeek != DayOfWeek.Sunday || date.DayOfWeek != DayOfWeek.Saturday);
         }
+        /// <summary>
+        /// Get the lasy day of month
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static DateTime GetLastDayOfMonth(this DateTime dateTime)
         {
             return new DateTime(dateTime.Year, dateTime.Month, 1).AddMonths(1).AddDays(-1);
         }
+        /// <summary>
+        /// Date filter
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         public static bool Between(this DateTime date, DateTime startDate, DateTime endDate)
         {
             return date.Ticks >= startDate.Ticks && date.Ticks <= endDate.Ticks;

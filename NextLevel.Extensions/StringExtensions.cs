@@ -6,32 +6,71 @@ namespace NextLevel.Extensions
 {
     public static class StringExtensions
     {
+        /// <summary>
+        /// String to int
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static int ToInt(this string arg)
             => Convert.ToInt32(arg);
-
+        /// <summary>
+        /// String to double
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static double ToDouble(this string arg)
             => Convert.ToDouble(arg);
-
+        /// <summary>
+        /// String to decimal
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static decimal ToDecimal(this string arg)
             => Convert.ToDecimal(arg);
-
+        /// <summary>
+        /// String to Time
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static DateTime ToDateTime(this string arg)
             => DateTime.Parse(arg);
-
+        /// <summary>
+        /// Check value is numberic
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static bool IsNumeric(this string arg)
             => long.TryParse(arg, out _);
 
-
+        /// <summary>
+        /// Check the given email address is valid
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static bool IsValidEmailAddress(this string arg)
             => new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").IsMatch(arg);
-
+        /// <summary>
+        /// Substring from the left of word
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public static string CutFromLeft(this string arg, int index)
             => arg.Length > index ? arg.Substring(0, index) : arg;
 
-
+        /// <summary>
+        /// Substring from the right of word
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public static string CutFromRight(this string arg, int index)
             => arg.Length > index ? arg.Substring(arg.Length - index, index) : arg;
-
+        /// <summary>
+        /// Check the string is date
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static bool IsDate(this string arg)
         {
             try
@@ -47,7 +86,12 @@ namespace NextLevel.Extensions
             return false;
         }
 
-
+        /// <summary>
+        /// String to Int with default value
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public static int ToIntOrDefault(this string arg, int defaultValue)
         {
             try
@@ -72,7 +116,12 @@ namespace NextLevel.Extensions
 
             return defaultValue;
         }
-
+        /// <summary>
+        /// Replace the string from text
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="removetext"></param>
+        /// <returns></returns>
         public static string Replace(this string arg, string removetext)
         {
             if (string.IsNullOrEmpty(arg)) return arg;
@@ -87,6 +136,13 @@ namespace NextLevel.Extensions
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Change the matched argument in text the change with exchange parameter.
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="removetext"></param>
+        /// <param name="exchangeText"></param>
+        /// <returns></returns>
         public static string Replace(this string arg, string removetext, string exchangeText)
         {
             var stripText = arg;
@@ -103,7 +159,11 @@ namespace NextLevel.Extensions
             }
             return stripText;
         }
-
+        /// <summary>
+        /// Find the count of word.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static int WordCount(this string input)
         {
             var count = 0;
