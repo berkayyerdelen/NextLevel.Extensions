@@ -7,20 +7,20 @@ namespace NextLevel.Extensions
 {
     public static class TypeExtensions
     {
-        public static bool IsBoolen(this Type type)
+        public static bool IsTypeBoolen(this Type type)
         {
             return type == typeof(Boolean);
         }
-        public static bool IsString(this Type type)
+        public static bool IsTypeString(this Type type)
         {
             return type == typeof(String);
         }
-        public static bool IsDate(this Type type)
+        public static bool IsTypeDate(this Type type)
         {
-           
+
             return type == typeof(DateTime);
         }
-        public static bool IsNumeric(this Type t)
+        public static bool IsTypeNumeric(this Type t)
         {
             var type = t.GetTypeWithoutNullability();
             return
@@ -37,20 +37,19 @@ namespace NextLevel.Extensions
 
         public static Type GetTypeWithoutNullability(this Type t)
         {
-            return t.IsNullable() ? new NullableConverter(t).UnderlyingType : t;
+            return t.IsTypeNullable() ? new NullableConverter(t).UnderlyingType : t;
         }
 
-        public static bool IsNullable(this Type t)
+        public static bool IsTypeNullable(this Type t)
         {
             return t.IsGenericType &&
                    t.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
-        public static bool IsStatic(this Type t)
+        public static bool IsTypeStatic(this Type t)
         {
             var c = t.GetConstructors();
             return (t.IsAbstract && t.IsSealed && c.Length == 0);
         }
-
     }
 }

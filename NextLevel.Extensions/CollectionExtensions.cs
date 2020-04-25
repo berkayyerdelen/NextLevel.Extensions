@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace NextLevel.Extensions
 {
@@ -23,7 +22,6 @@ namespace NextLevel.Extensions
             }
             return finalList;
         }
-
         public static IQueryable<T> PageBy<T>(this IQueryable<T> query, int skipCount, int maxResultCount)
         {
             if (query == null)

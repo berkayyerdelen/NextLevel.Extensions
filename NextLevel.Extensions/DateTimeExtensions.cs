@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NextLevel.Extensions
 {
@@ -63,29 +61,9 @@ namespace NextLevel.Extensions
         {
             return new DateTime(dateTime.Year, dateTime.Month, 1).AddMonths(1).AddDays(-1);
         }
-        public static DateTime EndOfTheMonth(this DateTime date)
+        public static bool Between(this DateTime date, DateTime startDate, DateTime endDate)
         {
-            var endOfTheMonth = new DateTime(date.Year, date.Month, 1)
-                .AddMonths(1)
-                .AddDays(-1);
-
-            return endOfTheMonth;
+            return date.Ticks >= startDate.Ticks && date.Ticks <= endDate.Ticks;
         }
-        public static DateTime AddWorkdays(this DateTime d, int days)
-        {
-            // start from a weekday
-            while (d.DayOfWeek.IsWeekday()) d = d.AddDays(1.0);
-            for (int i = 0; i < days; ++i)
-            {
-                d = d.AddDays(1.0);
-                while (d.DayOfWeek.IsWeekday()) d = d.AddDays(1.0);
-            }
-            return d;
-        }
-        public static bool Between(this DateTime dt, DateTime rangeBeg, DateTime rangeEnd)
-        {
-            return dt.Ticks >= rangeBeg.Ticks && dt.Ticks <= rangeEnd.Ticks;
-        }
-
     }
 }

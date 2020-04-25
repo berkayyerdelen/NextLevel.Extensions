@@ -1,113 +1,109 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace NextLevel.Extensions
 {
     public static class StringExtensions
     {
-        public static DateTime? ToDateTime(this string date)
-        {
-            DateTime _date;
-            var parsedDate = DateTime.TryParse(date, out _date);
-            return parsedDate ? _date : new DateTime?();
-        }
-        public static bool IsNumeric(this string text)
-        {
-            long number;
-            return long.TryParse(text, out number);
-        }
-        public static bool IsValidEmailAddress(this string s)
-        {
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(s);
-        }
-       public static string CutFromLeft(this string text, int length)
-        {
-            if (text.Length>length)
-            {
-                return text.Substring(0, length);
-            }
-            return text;
-        }
+        public static int ToInt(this string arg)
+            => Convert.ToInt32(arg);
 
-        public static string CutFromRight(this string text, int length)
-        {
-            if (text.Length > length)
-            {
-                return text.Substring(text.Length-length, length);
-            }
-            return text;
-        }
-        public static bool IsDate(this string text)
-        {
-            if (!String.IsNullOrEmpty(text))
-            {
-                DateTime date;
-                return (DateTime.TryParse(text, out date));
-            }
-            else
-            {
-                return false;
-            }
-        }
+        public static double ToDouble(this string arg)
+            => Convert.ToDouble(arg);
 
-        public static int ToIntWithDefaultValue(this string text,int defaultValue)
+        public static decimal ToDecimal(this string arg)
+            => Convert.ToDecimal(arg);
+
+        public static DateTime ToDateTime(this string arg)
+            => DateTime.Parse(arg);
+
+        public static bool IsNumeric(this string arg)
+            => long.TryParse(arg, out _);
+
+
+        public static bool IsValidEmailAddress(this string arg)
+            => new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").IsMatch(arg);
+
+        public static string CutFromLeft(this string arg, int index)
+            => arg.Length > index ? arg.Substring(0, index) : arg;
+
+
+        public static string CutFromRight(this string arg, int index)
+            => arg.Length > index ? arg.Substring(arg.Length - index, index) : arg;
+
+        public static bool IsDate(this string arg)
         {
             try
             {
-                if (!String.IsNullOrEmpty(text))
+                if (!String.IsNullOrEmpty(arg) && DateTime.TryParse(arg, out _)) return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+                
+            }
+           
+            return false;
+        }
+
+
+        public static int ToIntOrDefault(this string arg, int defaultValue)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(arg))
                 {
-                    return Convert.ToInt32(text);
+                    var result = 0;
+
+                    Int32.TryParse(arg, out result);
+                    if (result==0)
+                    {
+                        return defaultValue;
+                    }
+
+                    return result;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+               throw new Exception(e.Message);
             }
+
             return defaultValue;
         }
 
-        public static int ToInt(this string text)
+        public static string Replace(this string arg, string removetext)
         {
-            Int32.TryParse(text, out int number);
-            return number;
-        }
-        public static string Strip(this string data, string textToStrip)
-        {
-            var stripText = data;
-            if (string.IsNullOrEmpty(data))
-            {
-                return data;
-            }
-            try
-            {
-                stripText = Regex.Replace(data, textToStrip, string.Empty);
-            }
-            catch (Exception)
-            {
-
-                
-            }
-            return stripText;
-        }
-        public static string Strip(this string data, string textToStrip, string textToReplace)
-        {
-            var stripText = data;
-
-            if (string.IsNullOrEmpty(data)) return stripText;
+            if (string.IsNullOrEmpty(arg)) return arg;
 
             try
             {
-                stripText = Regex.Replace(data, textToStrip, textToReplace);
+                var replacedtext = Regex.Replace(arg, removetext, string.Empty);
+                return replacedtext;
             }
-            catch
+            catch (Exception e)
             {
+                throw new Exception(e.Message);
+            }
+        }
+        public static string Replace(this string arg, string removetext, string exchangeText)
+        {
+            var stripText = arg;
+
+            if (string.IsNullOrEmpty(arg)) return stripText;
+
+            try
+            {
+                stripText = Regex.Replace(arg, removetext, exchangeText);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             return stripText;
         }
+
         public static int WordCount(this string input)
         {
             var count = 0;
@@ -118,8 +114,9 @@ namespace NextLevel.Extensions
                 var matches = re.Matches(input);
                 count = matches.Count;
             }
-            catch
+            catch (Exception e)
             {
+                throw new Exception(e.Message);
             }
             return count;
         }
