@@ -103,5 +103,15 @@ namespace NextLevel.Extensions
         {
             return date.Ticks >= startDate.Ticks && date.Ticks <= endDate.Ticks;
         }
+        /// <summary>
+        /// First day of the month
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static DateTime BeginningOfTheMonth(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, 1);
+        }
+
     }
 }

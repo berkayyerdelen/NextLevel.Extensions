@@ -10,6 +10,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/berkayyerdelen/NextLevel.Extensions</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
+    <UserSecretsId>8390661b-642c-40a4-87b5-edc0c24a2dfc</UserSecretsId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

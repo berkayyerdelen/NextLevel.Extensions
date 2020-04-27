@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace NextLevel.Extensions
 {
@@ -33,7 +34,7 @@ namespace NextLevel.Extensions
             this Dictionary<TKey, TValue> dictionary)
         {
 
-            var source =dictionary.Select(x => new DictionaryFixture<TKey, TValue>(x.Key,x.Value));
+            var source = dictionary.Select(x => new DictionaryFixture<TKey, TValue>(x.Key, x.Value));
             return source.ToList();
 
         }
@@ -93,7 +94,34 @@ namespace NextLevel.Extensions
                 ? query.Where(predicate)
                 : query;
         }
+
+        /// <summary>
+        /// Async create of a System.Collections.Generic.List<T> from an 
+        /// System.Collections.Generic.IQueryable<T>.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <param name="list">The System.Collections.Generic.IEnumerable<T> 
+        /// to create a System.Collections.Generic.List<T> from.</param>
+        /// <returns> A System.Collections.Generic.List<T> that contains elements 
+        /// from the input sequence.</returns>
+        public static Task<List<T>> ToListAsync<T>(this IQueryable<T> list)
+        {
+
+            return Task.Run(() => list.ToList());
+        }
+        /// <summary>
+        ///  Compare the given values between the arguments
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public static bool Between<T>(this T value, T from, T to) where T : IComparable<T>
+        {
+            return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
+        }
     }
 
-   
+
 }
