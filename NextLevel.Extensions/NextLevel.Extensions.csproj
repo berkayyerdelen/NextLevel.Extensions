@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Berkay Yerdelen</Authors>
+    
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Extensions Methods</Description>
     <PackageProjectUrl></PackageProjectUrl>
