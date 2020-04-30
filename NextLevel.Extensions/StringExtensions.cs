@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace NextLevel.Extensions
@@ -180,5 +181,19 @@ namespace NextLevel.Extensions
             }
             return count;
         }
+        /// <summary>
+        /// Set default value if te given value is null
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="considerWhiteSpaceIsEmpty"></param>
+        /// <returns></returns>
+        public static string DefaultIfEmpty(this string str, string defaultValue, bool considerWhiteSpaceIsEmpty = false) => (considerWhiteSpaceIsEmpty ? string.IsNullOrWhiteSpace(str) : string.IsNullOrEmpty(str)) ? defaultValue : str;
+        /// <summary>
+        /// Remove the non-digits values in string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string RemoveNonDigits(this string value) => new string(value?.Where(c => char.IsDigit(c)).ToArray());
     }
 }
